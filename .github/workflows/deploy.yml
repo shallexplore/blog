@@ -1,14 +1,55 @@
-name: Deploy
+name: Deploy to GitHub Pages
 
 on:
-  #schedule:
-  #  - cron: '5 23 * * 0' # 08:05(Mon) JST
+  push:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  curl:
-    name: Kick deploy hook
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: curl
-        run: curl -X POST '${{ secrets.DEPLOY_HOOK_URL }}'
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        env:
+          NOTION_API_SECRET: ${{ secrets.NOTION_API_SECRET }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
