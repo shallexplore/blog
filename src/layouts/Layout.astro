@@ -76,6 +76,47 @@ if (database.Icon && database.Icon.Type === 'file') {
     />
   </head>
   <body>
+<nav class="main-site-nav" aria-label="Main site">
+  <a class="wordmark" href="/">S. LIMBU</a>
+  <div class="links">
+    <a href="/#book">Book</a>
+    <a href="/#explore">Shall Explore</a>
+    <a href="/#heritage">Heritage</a>
+    <a href="/blog/" aria-current="page">Blog</a>
+    <a href="/#contact">Connect</a>
+  </div>
+</nav>
+
+<style>
+  .main-site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: #14110d;
+    color: #f3ead7;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+  }
+  .main-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .main-site-nav .links {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .main-site-nav a:hover,
+  .main-site-nav a[aria-current='page'] {
+    color: #c9a24d;
+  }
+</style>
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <div class="container">
       <header>
