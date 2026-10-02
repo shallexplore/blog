@@ -5,11 +5,26 @@
   border-top: 1px dashed #888;
   margin: 0 auto;
   padding: 40px 0 0;
-}
-@media (max-width: 640px) {
-  .main footer {
-    margin: 0 auto 40px;
+}.mobileCats { display: none; }
+
+@media (max-width: 900px) {
+  .mobileCats { display: block; margin: 0 0 1.25rem; }
+  .desktopCats { display: none; }
+
+  .mobileCats h1,
+  .mobileCats h2,
+  .mobileCats h3,
+  .mobileCats h4 { display: none; }
+
+  .mobileCats ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
+  .mobileCats li { margin: 0; }
 }
 
 .post {
