@@ -5,6 +5,7 @@ import CoverImageDownloader from './src/integrations/cover-image-downloader';
 import CustomIconDownloader from './src/integrations/custom-icon-downloader';
 import FeaturedImageDownloader from './src/integrations/featured-image-downloader';
 import PublicNotionCopier from './src/integrations/public-notion-copier';
+import sitemap from '@astrojs/sitemap';
 
 const getSite = function () {
   if (CUSTOM_DOMAIN) {
@@ -38,6 +39,14 @@ export default defineConfig({
   base: BASE_PATH,
   integrations: [
     icon(),
+      integrations: [
+    icon(),
+    sitemap(),
+    CoverImageDownloader(),
+    CustomIconDownloader(),
+    FeaturedImageDownloader(),
+    PublicNotionCopier(),
+  ],
     CoverImageDownloader(),
     CustomIconDownloader(),
     FeaturedImageDownloader(),
