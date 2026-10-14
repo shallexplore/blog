@@ -170,7 +170,7 @@ if (database.Icon && database.Icon.Type === 'file') {
             <slot name="main" />
 
             <footer>
-              <div>
+              <div class="powered-by">
                 <span>Powered by&nbsp;</span>
                 <a href="https://github.com/otoyo/astro-notion-blog"
                   >astro-notion-blog</a
@@ -209,6 +209,16 @@ if (database.Icon && database.Icon.Type === 'file') {
         set();
         window.addEventListener('resize', set);
         window.addEventListener('load', set);
+      })();
+    </script>
+      <script is:inline>
+      (function () {
+        if (window.innerWidth > 640) return;
+        var btn = document.querySelector('aside .open-search-modal');
+        var cats = document.querySelector('[class*="mobileCats"]');
+        if (!btn || !cats) return;
+        btn.style.margin = '8px 0 0';
+        cats.appendChild(btn);
       })();
     </script>
   </body>
@@ -338,6 +348,14 @@ if (database.Icon && database.Icon.Type === 'file') {
   main footer a {
     color: inherit;
     text-decoration: underline;
+  }
+  .powered-by {
+    margin-top: 24px;
+  }
+  @media (max-width: 640px) {
+    .powered-by {
+      display: none;
+    }
   }
 </style>
 
