@@ -60,3 +60,14 @@
   .mobileCats ul::-webkit-scrollbar { display: none; }
   .mobileCats li { flex: 0 0 auto; margin: 0; white-space: nowrap; }
 }
+@media (max-width: 640px) {
+  .mobileCats {
+    position: sticky;
+    top: var(--nav-h, 58px);
+    z-index: 900;
+    background: #fff;
+    padding: 8px 0;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+}
