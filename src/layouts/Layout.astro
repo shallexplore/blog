@@ -181,8 +181,10 @@ if (database.Icon && database.Icon.Type === 'file') {
         </main>
 
         <aside>
-          <SearchButton />
-          <slot name="aside" />
+          <div class="aside-inner">
+            <SearchButton />
+            <slot name="aside" />
+          </div>
         </aside>
       </div>
     </div>
@@ -232,10 +234,21 @@ if (database.Icon && database.Icon.Type === 'file') {
     padding: 20px 20px;
     background-color: #f4f4f4;
   }
+  .aside-inner {
+    position: sticky;
+    top: 70px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+  }
   @media (max-width: 640px) {
     aside {
       order: 2;
       width: 100%;
+    }
+    .aside-inner {
+      position: static;
+      max-height: none;
+      overflow: visible;
     }
   }
 
