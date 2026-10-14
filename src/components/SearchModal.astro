@@ -132,18 +132,13 @@
       } else if (event.keyCode === 40) {
         // Down
         selectDown(event)
-      } else if (event.keyCode === 40) {
-        // Down
-        selectDown(event)
       }
     }
-    }
 
-        function select() {
+    function select() {
       const a = document.querySelector('.search-result ul > li.selected a')
       if (a) a.click()
     }
-
     function selectFirst() {
       const li = document.querySelector('.search-result ul > li:first-child')
       if (li) {
