@@ -132,14 +132,16 @@
       } else if (event.keyCode === 40) {
         // Down
         selectDown(event)
-      } else {
-        searchAndRender()
+      } else if (event.keyCode === 40) {
+        // Down
+        selectDown(event)
       }
     }
+    }
 
-    function select() {
+        function select() {
       const a = document.querySelector('.search-result ul > li.selected a')
-      a.click()
+      if (a) a.click()
     }
 
     function selectFirst() {
@@ -205,12 +207,14 @@
       selectFirst()
     }
 
-    function search(query) {
-      const results = []
-      feedItems.forEach((item) => {
-        if (item.title.includes(query) || item?.description?.includes(query)) {
-          results.push(item)
-        }
+        function search(query) {
+      const q = query.toLowerCase()
+      return feedItems.filter(
+        (item) =>
+          item.title.toLowerCase().includes(q) ||
+          (item.description || '').toLowerCase().includes(q)
+      )
+    }
       })
       return results
     }
@@ -283,6 +287,14 @@
     document
       .getElementsByClassName('overlay')[0]
       .addEventListener('click', closeModal)
+          document.addEventListener('keyup', (event) => {
+      const open =
+        document.querySelector('.search-modal-container').style.display ===
+        'block'
+      if (open && ![13, 27, 38, 40].includes(event.keyCode)) {
+        searchAndRender()
+      }
+    })
     document.addEventListener('keydown', handleKeydown)
   })
 </script>
