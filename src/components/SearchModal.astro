@@ -202,16 +202,13 @@
       selectFirst()
     }
 
-        function search(query) {
+    function search(query) {
       const q = query.toLowerCase()
       return feedItems.filter(
         (item) =>
           item.title.toLowerCase().includes(q) ||
           (item.description || '').toLowerCase().includes(q)
       )
-    }
-      })
-      return results
     }
 
     function renderResults(results) {
@@ -244,7 +241,7 @@
       const port = url.port ? `:${url.port}` : ''
 
       const res = await fetch(
-        `${url.protocol}//${url.hostname}${port}/feed`
+        `${url.protocol}//${url.hostname}${port}/blog/feed`
       )
       if (res.status !== 200) {
         console.log(res.status)
