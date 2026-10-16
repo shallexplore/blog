@@ -76,6 +76,32 @@ if (database.Icon && database.Icon.Type === 'file') {
       integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0"
       crossorigin="anonymous"
     />
+    <!-- MailerLite Universal -->
+    <script is:inline>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2716952');
+    </script>
+    <!-- End MailerLite Universal -->
+
+    <!-- Subscribe popup: 30s after landing, once every 7 days -->
+    <script is:inline>
+      window.addEventListener('load', function () {
+        var KEY = 'ml_popup_last_shown';
+        var WAIT_MS = 30000;
+        var COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+        try {
+          var last = parseInt(localStorage.getItem(KEY) || '0', 10);
+          if (Date.now() - last < COOLDOWN_MS) return;
+        } catch (e) {}
+        setTimeout(function () {
+          try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+          if (typeof ml === 'function') ml('show', 'yFHhKP', true);
+        }, WAIT_MS);
+      });
+    </script>
   </head>
   <body>
 <nav class="main-site-nav" aria-label="Main site">
@@ -84,6 +110,7 @@ if (database.Icon && database.Icon.Type === 'file') {
     <a href="/#work">Work</a>
     <a href="/#book">Book</a>
     <a href="/blog/" aria-current="page">Blog</a>
+    <a class="ml-onclick-form" href="javascript:void(0)" onclick="ml('show', 'yFHhKP', true)">Subscribe</a>
     <a href="/#contact">Connect</a>
   </div>
 </nav>
